@@ -1,353 +1,187 @@
-/* eslint-disable react/no-unknown-property */
-import * as THREE from 'three'
-import { useRef, useState, useEffect, memo } from 'react'
-import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
-import {
-  useFBO,
-  useGLTF,
-  useScroll,
-  Image,
-  Scroll,
-  Preload,
-  ScrollControls,
-  MeshTransmissionMaterial,
-  Text,
-} from '@react-three/drei'
-import { easing } from 'maath'
+import React from 'react';
+import Home from './Home';
+import './style.css'; 
+import CardNav from './CardNav';
 
-export default function FluidGlass({
-  mode = 'lens',
-  lensProps = {},
-  barProps = {},
-  cubeProps = {},
-}) {
-  const Wrapper = mode === 'bar' ? Bar : mode === 'cube' ? Cube : Lens
-  const rawOverrides =
-    mode === 'bar' ? barProps : mode === 'cube' ? cubeProps : lensProps
+// Remplacez les images par de vraies images dans le dossier public/assets
+const placeholderImage = "https://via.placeholder.com/250";
+const placeholderGolfImage = "https://via.placeholder.com/400x300/cccccc/ffffff?text=Image+de+golf";
 
-  const {
-    navItems = [
-      { label: 'Home', link: '' },
-      { label: 'About', link: '' },
-      { label: 'Contact', link: '' },
-    ],
-    ...modeProps
-  } = rawOverrides
+function TSLomaSections() {
+    const navItems = [
+      {
+        label: "À propos",
+        bgColor: "#0D0716",
+        textColor: "#fff",
+        links: [
+          { label: "L'entreprise", href: "#about" },
+          { label: "Nos valeurs", href: "#values" }
+        ]
+      },
+      {
+        label: "Services", 
+        bgColor: "#170D27",
+        textColor: "#fff",
+        links: [
+          { label: "Conseil", href: "#services" },
+          { label: "Formation", href: "#services" }
+        ]
+      },
+      {
+        label: "Contact",
+        bgColor: "#271E37", 
+        textColor: "#fff",
+        links: [
+          { label: "Email", href: "#contact" },
+          { label: "Réseaux sociaux", href: "#" }
+        ]
+      }
+    ];
 
-  return (
-    <Canvas
-      camera={{ position: [0, 0, 20], fov: 15 }}
-      gl={{ alpha: true }}
-    >
-      <ScrollControls damping={0.2} pages={3} distance={0.4}>
-        {mode === 'bar' && <NavItems items={navItems} />}
-        <Wrapper modeProps={modeProps}>
-          <Scroll>
-            <Typography />
-            <Images />
-          </Scroll>
-          <Scroll html />
-          <Preload />
-        </Wrapper>
-      </ScrollControls>
-    </Canvas>
-  )
+    return (
+        <main>
+            <CardNav 
+              logoAlt="Logo de l'entreprise"
+              items={navItems}
+              baseColor="#fff"
+              menuColor="#000"
+              buttonBgColor="#111"
+              buttonTextColor="#fff"
+              ease="power3.out"
+            />
+
+            <section className="hero-section">
+                {/* Le fond a été supprimé ici */}
+                <div className="hero-content">
+                    <h2 className="slogan">Accompagner les entreprises et les particuliers vers la réussite grâce à un conseil stratégique et une formation adaptée.</h2>
+                    <a href="#contact" className="cta-button">Contactez-nous</a>
+                </div>
+            </section>
+
+            <section id="about" className="about-section">
+                <div className="container">
+                    <div className="about-content">
+                        <div className="portrait-container">
+                            <img src={placeholderImage} alt="Portrait de Vincent Amara" className="portrait-photo" />
+                        </div>
+                        <div className="bio-text">
+                            <h3>Vincent Amara, Dirigeant</h3>
+                            <p>Fondateur de TS-LOMA, Vincent Amara est un expert reconnu dans le conseil aux entreprises et la formation professionnelle. Fort de son expérience, il met son expertise au service de ses clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. Sa philosophie est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" className="services-section">
+                <div className="container">
+                    <h2 className="section-title">Nos services</h2>
+                    <div className="services-grid">
+                        <div className="service-card">
+                            <h4>Conseil en stratégie</h4>
+                            <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
+                        </div>
+                        <div className="service-card">
+                            <h4>Formation en management</h4>
+                            <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
+                        </div>
+                        <div className="service-card">
+                            <h4>Accompagnement des particuliers</h4>
+                            <p>Bénéficiez d'un coaching personnalisé pour vos projets de carrière ou de reconversion.</p>
+                        </div>
+                        <div className="service-card">
+                            <h4>Support PME</h4>
+                            <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="values" className="values-section">
+                <div className="container">
+                    <div className="values-content">
+                        <div className="values-text">
+                            <h2 className="section-title">Nos valeurs</h2>
+                            <p>Chez TS-LOMA, notre philosophie s'inspire de la rigueur et de la vision du golf. Chaque projet est un nouveau parcours où nous appliquons nos principes fondamentaux :</p>
+                            <ul>
+                                <li>**Précision & Stratégie :** Comme un golfeur qui choisit le bon club pour le bon coup, nous définissons avec précision la meilleure stratégie pour atteindre vos objectifs.</li>
+                                <li>**Patience & Persévérance :** La réussite ne se construit pas en un seul coup. Nous vous accompagnons à chaque étape, avec constance et engagement, jusqu'au succès.</li>
+                                <li>**Intégrité & Respect :** Nous jouons toujours selon les règles, avec transparence et honnêteté, pour bâtir une relation de confiance durable.</li>
+                            </ul>
+                        </div>
+                        <div className="values-image-container">
+                            <img src={placeholderGolfImage} alt="Image d'un golfeur sur un parcours" className="values-image" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="references" className="references-section">
+                <div className="container">
+                    <h2 className="section-title">Références et collaborations</h2>
+                    <div className="references-grid">
+                        <img src={placeholderImage} alt="Logo Entreprise 1" className="ref-logo" />
+                        <img src={placeholderImage} alt="Logo Entreprise 2" className="ref-logo" />
+                        <img src={placeholderImage} alt="Logo Entreprise 3" className="ref-logo" />
+                        <img src={placeholderImage} alt="Logo Entreprise 4" className="ref-logo" />
+                        <img src={placeholderImage} alt="Logo Entreprise 5" className="ref-logo" />
+                        <img src={placeholderImage} alt="Logo Entreprise 6" className="ref-logo" />
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" className="contact-section">
+                <div className="container">
+                    <h2 className="section-title">Contactez-nous</h2>
+                    <form className="contact-form">
+                        <input type="text" name="name" placeholder="Votre nom" required />
+                        <input type="email" name="email" placeholder="Votre email" required />
+                        <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+                        <button type="submit" className="cta-button submit-button">Envoyer le message</button>
+                    </form>
+                    <div className="contact-info">
+                        <p>Email: contact@ts-loma.fr</p>
+                        <p>Téléphone: +33 6 12 34 56 78</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer className="footer">
+                <div className="container">
+                    <p>&copy; 2024 TS-LOMA. Tous droits réservés.</p>
+                    <div className="footer-links">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    );
 }
 
-const ModeWrapper = memo(function ModeWrapper({
-  children,
-  glb,
-  geometryKey,
-  lockToBottom = false,
-  followPointer = true,
-  modeProps = {},
-  ...props
-}) {
-  const ref = useRef()
-  const { nodes } = useGLTF(glb)
-  const buffer = useFBO()
-  const { viewport: vp } = useThree()
-  const [scene] = useState(() => new THREE.Scene())
-  const geoWidthRef = useRef(1)
+export default function App() {
+    const [currentPage, setCurrentPage] = React.useState(window.location.pathname);
 
-  useEffect(() => {
-    const geo = nodes[geometryKey]?.geometry
-    geo.computeBoundingBox()
-    geoWidthRef.current =
-      geo.boundingBox.max.x - geo.boundingBox.min.x || 1
-  }, [nodes, geometryKey])
+    React.useEffect(() => {
+        const handlePopState = () => {
+            setCurrentPage(window.location.pathname);
+        };
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, []);
 
-  useFrame((state, delta) => {
-    const { gl, viewport, pointer, camera } = state
-    const v = viewport.getCurrentViewport(camera, [0, 0, 15])
+    const navigate = (path) => {
+        window.history.pushState(null, '', path);
+        setCurrentPage(path);
+    };
 
-    const destX = followPointer ? (pointer.x * v.width) / 2 : 0
-    const destY = lockToBottom
-      ? -v.height / 2 + 0.2
-      : followPointer
-        ? (pointer.y * v.height) / 2
-        : 0
-    easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta)
-
-    if (modeProps.scale == null) {
-      const maxWorld = v.width * 0.9
-      const desired = maxWorld / geoWidthRef.current
-      ref.current.scale.setScalar(Math.min(0.15, desired))
-    }
-
-    gl.setRenderTarget(buffer)
-    gl.render(scene, camera)
-    gl.setRenderTarget(null)
-  
-    // Background Color
-    gl.setClearColor(0x5227ff, 1)
-  })
-
-  const {
-    scale,
-    ior,
-    thickness,
-    anisotropy,
-    chromaticAberration,
-    ...extraMat
-  } = modeProps
-
-  return (
-    <>
-      {createPortal(children, scene)}
-      <mesh scale={[vp.width, vp.height, 1]}>
-        <planeGeometry />
-        <meshBasicMaterial map={buffer.texture} transparent />
-      </mesh>
-      <mesh
-        ref={ref}
-        scale={scale ?? 0.15}
-        rotation-x={Math.PI / 2}
-        geometry={nodes[geometryKey]?.geometry}
-        {...props}
-      >
-        <MeshTransmissionMaterial
-          buffer={buffer.texture}
-          ior={ior ?? 1.15}
-          thickness={thickness ?? 5}
-          anisotropy={anisotropy ?? 0.01}
-          chromaticAberration={chromaticAberration ?? 0.1}
-          {...extraMat}
-        />
-      </mesh>
-    </>
-  )
-})
-
-function Lens({ modeProps, ...p }) {
-  return (
-    <ModeWrapper
-      glb="/assets/3d/lens.glb"
-      geometryKey="Cylinder"
-      followPointer
-      modeProps={modeProps}
-      {...p}
-    />
-  )
-}
-
-function Cube({ modeProps, ...p }) {
-  return (
-    <ModeWrapper
-      glb="/assets/3d/cube.glb"
-      geometryKey="Cube"
-      followPointer
-      modeProps={modeProps}
-      {...p}
-    />
-  )
-}
-
-function Bar({ modeProps = {}, ...p }) {
-  const defaultMat = {
-    transmission: 1,
-    roughness: 0,
-    thickness: 10,
-    ior: 1.15,
-    color: '#ffffff',
-    attenuationColor: '#ffffff',
-    attenuationDistance: 0.25,
-  }
-
-  return (
-    <ModeWrapper
-      glb="/assets/3d/bar.glb"
-      geometryKey="Cube"
-      lockToBottom
-      followPointer={false}
-      modeProps={{ ...defaultMat, ...modeProps }}
-      {...p}
-    />
-  )
-}
-
-function NavItems({ items }) {
-  const group = useRef()
-  const { viewport, camera } = useThree()
-
-  const DEVICE = {
-    mobile: { max: 639, spacing: 0.2, fontSize: 0.035 },
-    tablet: { max: 1023, spacing: 0.24, fontSize: 0.045 },
-    desktop: { max: Infinity, spacing: 0.3, fontSize: 0.045 },
-  }
-  const getDevice = () => {
-    const w = window.innerWidth
-    return w <= DEVICE.mobile.max
-      ? 'mobile'
-      : w <= DEVICE.tablet.max
-        ? 'tablet'
-        : 'desktop'
-  }
-
-  const [device, setDevice] = useState(getDevice())
-
-  useEffect(() => {
-    const onResize = () => setDevice(getDevice())
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const { spacing, fontSize } = DEVICE[device]
-
-  useFrame(() => {
-    if (!group.current) return
-    const v = viewport.getCurrentViewport(camera, [0, 0, 15])
-    group.current.position.set(0, -v.height / 2 + 0.2, 15.1)
-
-    group.current.children.forEach((child, i) => {
-      child.position.x = (i - (items.length - 1) / 2) * spacing
-    })
-  })
-
-  const handleNavigate = (link) => {
-    if (!link) return
-    link.startsWith('#')
-      ? (window.location.hash = link)
-      : (window.location.href = link)
-  }
-
-  return (
-    <group ref={group} renderOrder={10}>
-      {items.map(({ label, link }) => (
-        <Text
-          key={label}
-          fontSize={fontSize}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-          font="/assets/fonts/figtreeblack.ttf"
-          depthWrite={false}
-          outlineWidth={0}
-          outlineBlur="20%"
-          outlineColor="#000"
-          outlineOpacity={0.5}
-          depthTest={false}
-          renderOrder={10}
-          onClick={(e) => {
-            e.stopPropagation()
-            handleNavigate(link)
-          }}
-          onPointerOver={() => (document.body.style.cursor = 'pointer')}
-          onPointerOut={() => (document.body.style.cursor = 'auto')}
-        >
-          {label}
-        </Text>
-      ))}
-    </group>
-  )
-}
-
-function Images() {
-  const group = useRef()
-  const data = useScroll()
-  const { height } = useThree((s) => s.viewport)
-
-  useFrame(() => {
-    group.current.children[0].material.zoom = 1 + data.range(0, 1 / 3) / 3
-    group.current.children[1].material.zoom = 1 + data.range(0, 1 / 3) / 3
-    group.current.children[2].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
-    group.current.children[3].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
-    group.current.children[4].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
-  })
-
-  return (
-    <group ref={group}>
-      <Image
-        position={[-2, 0, 0]}
-        scale={[3, height / 1.1, 1]}
-        url="https://images.unsplash.com/photo-1595001354022-29103be3b73a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-      <Image
-        position={[2, 0, 3]}
-        scale={3}
-        url="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-      <Image
-        position={[-2.05, -height, 6]}
-        scale={[1, 3, 1]}
-        url="https://images.unsplash.com/photo-1513682121497-80211f36a7d3?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-      <Image
-        position={[-0.6, -height, 9]}
-        scale={[1, 2, 1]}
-        url="https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?q=80&w=2843&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-      <Image
-        position={[0.75, -height, 10.5]}
-        scale={1.5}
-        url="https://images.unsplash.com/photo-1505069190533-da1c9af13346?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-    </group>
-  )
-}
-
-function Typography() {
-  const DEVICE = {
-    mobile: { fontSize: 0.2 },
-    tablet: { fontSize: 0.40 },
-    desktop: { fontSize: 0.7 },
-  }
-  const getDevice = () => {
-    const w = window.innerWidth
-    return w <= 639
-      ? 'mobile'
-      : w <= 1023
-        ? 'tablet'
-        : 'desktop'
-  }
-
-  const [device, setDevice] = useState(getDevice())
-
-  useEffect(() => {
-    const onResize = () => setDevice(getDevice())
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const { fontSize } = DEVICE[device]
-
-  return (
-    <Text
-      position={[0, 0, 12]}
-      font="/assets/fonts/figtreeblack.ttf"
-      fontSize={fontSize}
-      letterSpacing={-0.05}
-      outlineWidth={0}
-      outlineBlur="20%"
-      outlineColor="#000"
-      outlineOpacity={0.5}
-      color="white"
-      anchorX="center"
-      anchorY="middle"
-    >
-      React Bits
-    </Text>
-  )
+    return (
+        <React.StrictMode>
+            {currentPage === '/site' ? (
+                <TSLomaSections />
+            ) : (
+                <Home navigate={navigate} />
+            )}
+        </React.StrictMode>
+    );
 }

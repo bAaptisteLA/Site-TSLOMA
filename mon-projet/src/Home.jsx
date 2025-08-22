@@ -2,7 +2,8 @@ import React from 'react';
 import LetterGlitch from './LetterGlitch';
 import ScrollVelocity from './ScrollVelocity';
 import './style.css'; 
-import './ScrollVelocity.css'; 
+import './ScrollVelocity.css';
+import './Home.css'; // AJOUTÉ : Import des styles pour la page Home
 
 export default function Home({ navigate }) {
   return (
@@ -18,7 +19,7 @@ export default function Home({ navigate }) {
       <div className="homepage-content-top">
         <div className="scroll-velocity-title">
           <ScrollVelocity 
-            texts={['TS-LOMA ', 'Stratégie ', 'Formation ', 'Conseil  Conseil ']}
+            texts={['TS-LOMA  TS-LOMA', 'Stratégie  Stratégie', 'Formation  Formation', 'Conseil  Conseil ']}
             velocity={50} 
             className="scroll-text"
           />
