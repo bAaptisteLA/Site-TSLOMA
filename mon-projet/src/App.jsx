@@ -158,16 +158,33 @@ function TSLomaSections() {
             </section>
 
             <section id="about" className="about-section">
-                <div className="container">
-                    <div className="about-content">
-                        <div className="portrait-container"></div>
-                        <div className="bio-text">
-                            <h3>TS-LOMA</h3>
-                            <p>L'équipe TS-LOMA est un ensemble d'experts reconnu dans le conseil aux entreprises informatiques. Fort de leurs expériences, ils mettent leur expertise au service de leurs clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. La philosophie de l'équipe est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+  <div className="container">
+    <div className="about-content" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+      <div className="about-image-container" style={{ flex: '0 0 auto' }}>
+        <TiltedCard
+          imageSrc="/golf2.jpg"
+          altText="Golf - Inspiration"
+          captionText="L'esprit du golf"
+          containerHeight="400px"
+          containerWidth="400px"
+          imageHeight="400px"
+          imageWidth="400px"
+          rotateAmplitude={12}
+          scaleOnHover={1.15}
+          showMobileWarning={false}
+          showTooltip={true}
+          displayOverlayContent={true}
+        />
+      </div>
+      <div className="bio-text" style={{ flex: '1 1 0' }}>
+        <h3>TS-LOMA</h3>
+        <p>
+          L'équipe TS-LOMA est un ensemble d'experts reconnu dans le conseil aux entreprises informatiques. Fort de leurs expériences, ils mettent leur expertise au service de leurs clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. La philosophie de l'équipe est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
             <section id="services" className="services-section">
   <h2 className="section-title" style={{ paddingBottom: '2rem', textAlign: 'center' }}>Nos services</h2>
