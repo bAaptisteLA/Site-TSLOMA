@@ -72,15 +72,15 @@ const ScrollStack = ({
       const rotation = rotationAmount ? i * rotationAmount * scaleProgress : 0;
       let blur = 0;
       if (blurAmount) {
-          let topCardIndex = 0;
-          for (let j = 0; j < cardsRef.current.length; j++) {
-              if (scrollTop >= (cardsRef.current[j].offsetTop - stackPositionPx - (itemStackDistance * j))) {
-                  topCardIndex = j;
-              }
+        let topCardIndex = 0;
+        for (let j = 0; j < cardsRef.current.length; j++) {
+          if (scrollTop >= (cardsRef.current[j].offsetTop - stackPositionPx - (itemStackDistance * j))) {
+            topCardIndex = j;
           }
-          if (i < topCardIndex) {
-              blur = Math.max(0, (topCardIndex - i) * blurAmount);
-          }
+        }
+        if (i < topCardIndex) {
+          blur = Math.max(0, (topCardIndex - i) * blurAmount);
+        }
       }
 
       let translateY = 0;
@@ -115,147 +115,7 @@ const ScrollStack = ({
       animationFrameRef.current = requestAnimationFrame(raf);
     };
     animationFrameRef.current = requestAnimationFrame(raf);
-    
-    scroller.addEventListener('scroll', updateCardTransforms);
-    updateCardTransforms();
 
-    return () => {
-      scroller.removeEventListener('scroll', updateCardTransforms);
-      cancelAnimationFrame(animationFrameRef.current);
-      lenis.destroy();
-    };
-  }, [itemDistance, updateCardTransforms]);
-
-  return (
-    <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
-      <div className="scroll-stack-inner">
-        {children}
-        <div className="scroll-stack-end" />
-      </div>
-    </div>
-  );
-};
-
-/*----------------------------------*/
-// DÉCLARATION DE LA VARIABLE companyLogos
-import React, { useLayoutEffect, useRef, useCallback, useState, useEffect } from 'react';
-import Lenis from "lenis";
-
-/*----------------------------------*/
-// IMPORTS DES COMPOSANTS EXTERNES
-import Home from './Home';
-import CardNav from './CardNav';
-import TiltedCard from './TiltedCard';
-import SpotlightCard from "./SpotlightCard";
-import LogoLoop from './LogoLoop';
-import "./style.css";
-import './SpotlightCard.css';
-import './LogoLoop.css';
-
-/*----------------------------------*/
-// SOUS-COMPOSANT POUR L'EFFET DE DÉFILEMENT (ScrollStack)
-
-export const ScrollStackItem = ({ children, itemClassName = "" }) => (
-  <div className={`scroll-stack-card ${itemClassName}`.trim()}>{children}</div>
-);
-
-const ScrollStack = ({
-  children,
-  className = "",
-  itemDistance = 100,
-  itemScale = 0.03,
-  itemStackDistance = 30,
-  stackPosition = "20%",
-  scaleEndPosition = "10%",
-  baseScale = 0.85,
-  rotationAmount = 0,
-  blurAmount = 0,
-}) => {
-  const scrollerRef = useRef(null);
-  const animationFrameRef = useRef(null);
-  const lenisRef = useRef(null);
-  const cardsRef = useRef([]);
-
-  const updateCardTransforms = useCallback(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller || !cardsRef.current.length) return;
-
-    const scrollTop = scroller.scrollTop;
-    const containerHeight = scroller.clientHeight;
-
-    const parsePercentage = (value, height) => (parseFloat(value) / 100) * height;
-
-    const stackPositionPx = parsePercentage(stackPosition, containerHeight);
-    const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
-
-    const endElement = scroller.querySelector('.scroll-stack-end');
-    const endElementTop = endElement ? endElement.offsetTop : 0;
-
-    cardsRef.current.forEach((card, i) => {
-      if (!card) return;
-
-      const cardTop = card.offsetTop;
-      const triggerStart = cardTop - stackPositionPx - (itemStackDistance * i);
-      const triggerEnd = cardTop - scaleEndPositionPx;
-      const pinStart = cardTop - stackPositionPx - (itemStackDistance * i);
-      const pinEnd = endElementTop - containerHeight / 2;
-
-      const calculateProgress = (current, start, end) => {
-        if (current < start) return 0;
-        if (current > end) return 1;
-        return (current - start) / (end - start);
-      };
-
-      const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
-      const targetScale = baseScale + (i * itemScale);
-      const scale = 1 - scaleProgress * (1 - targetScale);
-      const rotation = rotationAmount ? i * rotationAmount * scaleProgress : 0;
-      let blur = 0;
-      if (blurAmount) {
-          let topCardIndex = 0;
-          for (let j = 0; j < cardsRef.current.length; j++) {
-              if (scrollTop >= (cardsRef.current[j].offsetTop - stackPositionPx - (itemStackDistance * j))) {
-                  topCardIndex = j;
-              }
-          }
-          if (i < topCardIndex) {
-              blur = Math.max(0, (topCardIndex - i) * blurAmount);
-          }
-      }
-
-      let translateY = 0;
-      if (scrollTop >= pinStart && scrollTop <= pinEnd) {
-        translateY = scrollTop - cardTop + stackPositionPx + (itemStackDistance * i);
-      } else if (scrollTop > pinEnd) {
-        translateY = pinEnd - cardTop + stackPositionPx + (itemStackDistance * i);
-      }
-
-      card.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotate(${rotation}deg)`;
-      card.style.filter = blur > 0 ? `blur(${blur}px)` : '';
-    });
-  }, [itemScale, itemStackDistance, stackPosition, scaleEndPosition, baseScale, rotationAmount, blurAmount]);
-
-  useLayoutEffect(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller) return;
-
-    cardsRef.current = Array.from(scroller.querySelectorAll(".scroll-stack-card"));
-    cardsRef.current.forEach((card, i) => {
-      if (i < cardsRef.current.length - 1) {
-        card.style.marginBottom = `${itemDistance}px`;
-      }
-      card.style.will-change = 'transform, filter';
-    });
-
-    const lenis = new Lenis({ wrapper: scroller });
-    lenisRef.current = lenis;
-
-    const raf = (time) => {
-      lenis.raf(time);
-      animationFrameRef.current = requestAnimationFrame(raf);
-    };
-    animationFrameRef.current = requestAnimationFrame(raf);
-    
     scroller.addEventListener('scroll', updateCardTransforms);
     updateCardTransforms();
 
@@ -292,6 +152,7 @@ const companyLogos = [
   { src: "/logos/logo-edf.svg", alt: "EDF", href: "https://www.edf.fr/" },
   { src: "/logos/logo-intermarche.svg", alt: "INTERMARCHE", href: "https://www.intermarche.fr/" },
 ];
+
 /*----------------------------------*/
 // COMPOSANT DE LA PAGE PRINCIPALE (TSLomaSections)
 
@@ -488,28 +349,28 @@ function TSLomaSections() {
 // COMPOSANT RACINE DE L'APPLICATION (App)
 
 export default function App() {
-    const [currentPage, setCurrentPage] = useState(window.location.pathname);
+  const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
-    useEffect(() => {
-        const handlePopState = () => {
-            setCurrentPage(window.location.pathname);
-        };
-        window.addEventListener('popstate', handlePopState);
-        return () => window.removeEventListener('popstate', handlePopState);
-    }, []);
-
-    const navigate = (path) => {
-        window.history.pushState(null, '', path);
-        setCurrentPage(path);
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(window.location.pathname);
     };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
-    return (
-        <React.StrictMode>
-            {currentPage === '/site' ? (
-                <TSLomaSections />
-            ) : (
-                <Home navigate={navigate} />
-            )}
-        </React.StrictMode>
-    );
+  const navigate = (path) => {
+    window.history.pushState(null, '', path);
+    setCurrentPage(path);
+  };
+
+  return (
+    <React.StrictMode>
+      {currentPage === '/site' ? (
+        <TSLomaSections />
+      ) : (
+        <Home navigate={navigate} />
+      )}
+    </React.StrictMode>
+  );
 }
