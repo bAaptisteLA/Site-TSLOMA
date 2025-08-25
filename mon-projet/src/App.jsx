@@ -144,7 +144,7 @@ const companyLogos = [
   { src: "/logos/logo-credit-agricole.svg", alt: "Crédit Agricole", href: "https://www.credit-agricole.com/" },
   { src: "/logos/logo-allianz.svg", alt: "Allianz", href: "https://www.allianz.fr/" },
   { src: "/logos/logo-la-poste.svg", alt: "La Poste", href: "https://www.laposte.fr/" },
-  { src: "/logos/logo-credit-mutuel.svg", alt: "Crédit Mutuel", href: "https://www.creditmutuel.fr/fr/index.html" },
+  { src: "/logos/logo-credit-mutuel.jpg", alt: "Crédit Mutuel", href: "https://www.creditmutuel.fr/fr/index.html" },
   { src: "/logos/logo-carrefour.svg", alt: "Carrefour", href: "https://www.carrefour.fr/" },
   { src: "/logos/logo-bred.svg", alt: "BRED Banque Populaire", href: "https://www.bred.fr/" },
   { src: "/logos/logo-gmf.png", alt: "GMF Assurances", href: "https://www.gmf.fr/" },
