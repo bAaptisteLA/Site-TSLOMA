@@ -134,13 +134,7 @@ const CardNav = ({
           <div className="logo-container">
             <h3 className="logo-text">TS-LOMA</h3>
           </div>
-          <button
-            type="button"
-            className="card-nav-cta-button"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-          >
-            Get Started
-          </button>
+          
         </div>
         <div className="card-nav-content" aria-hidden={!isExpanded}>
           {(items || []).slice(0, 3).map((item, idx) => (

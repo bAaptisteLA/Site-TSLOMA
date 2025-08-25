@@ -15,10 +15,10 @@ body {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 3.2rem;    /* Titre de section */
     font-weight: 700;
     color: #170D27;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
@@ -157,6 +157,63 @@ p {
     transform: translateY(-5px);
 }
 
+.services-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.service-card-custom {
+  background: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+  min-width: 220px;
+  max-width: 300px;
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Titres de section */
+.section-title,
+h2 {
+  font-size: 3.2rem;    /* Titre de section */
+  font-weight: 700;
+  color: #170D27;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Sous-titres des cartes services */
+.service-card-custom h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+}
+
+/* Texte des cartes services */
+.service-card-custom p {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Titre "TS-LOMA" dans la section À propos */
+.bio-text h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Texte de la section À propos */
+.bio-text p {
+    font-size: 1.18rem;
+    line-height: 1.7;
+}
+
 /* Values Section */
 .values-section {
     padding: 5rem 0;
@@ -188,6 +245,15 @@ p {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+}
+
+.values-image-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 420px;
+  padding-right: 2vw;
+  padding-bottom: 2vw;
 }
 
 /* References Section */
@@ -267,4 +333,12 @@ p {
 
 .footer-links a:hover {
     opacity: 0.8;
+}
+
+.custom-scroll-stack {
+    height: 100%;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
 }

@@ -6,10 +6,9 @@ import Lenis from "lenis";
 import Home from './Home';
 import CardNav from './CardNav';
 import TiltedCard from './TiltedCard';
-
-// IMPORTS DES STYLES
-import './style.css';
-import './ScrollStack.css';
+import SpotlightCard from "./SpotlightCard";
+import "./style.css";
+import './SpotlightCard.css';
 
 /*----------------------------------*/
 // SOUS-COMPOSANT POUR L'EFFET DE DÉFILEMENT (ScrollStack)
@@ -171,62 +170,57 @@ function TSLomaSections() {
             </section>
 
             <section id="services" className="services-section">
-                <h2 className="section-title" style={{ paddingBottom: '2rem', textAlign: 'center' }}>Nos services</h2>
-                <ScrollStack>
-                    <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Conseil en architecture MainFrame Z/OS</h2>
-                        <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
-                    </ScrollStackItem>
-                    <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Formation en MainFrame et Z/OS</h2>
-                        <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
-                    </ScrollStackItem>
-                    <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Accompagnement des indépendants</h2>
-                        <p>Portage salarial.</p>
-                    </ScrollStackItem>
-                    <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Support aux grandes entreprises</h2>
-                        <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
-                    </ScrollStackItem>
-                </ScrollStack>
-            </section>
+  <h2 className="section-title" style={{ paddingBottom: '2rem', textAlign: 'center' }}>Nos services</h2>
+  <div className="services-row">
+    <SpotlightCard className="card-spotlight">
+      <h2>Conseil en architecture MainFrame Z/OS</h2>
+      <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
+    </SpotlightCard>
+    <SpotlightCard className="card-spotlight">
+      <h2>Formation en MainFrame et Z/OS</h2>
+      <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
+    </SpotlightCard>
+    <SpotlightCard className="card-spotlight">
+      <h2>Accompagnement des indépendants</h2>
+      <p>Portage salarial.</p>
+    </SpotlightCard>
+    <SpotlightCard className="card-spotlight">
+      <h2>Support aux grandes entreprises</h2>
+      <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
+    </SpotlightCard>
+  </div>
+</section>
 
             <section id="values" className="values-section">
-    <div className="container">
-        <div className="values-content">
-            <div className="values-text">
-                <h2 className="section-title">Nos valeurs</h2>
-                <p>Chez TS-LOMA, notre philosophie s'inspire de la rigueur et de la vision du golf. Chaque projet est un nouveau parcours où nous appliquons nos principes fondamentaux :</p>
-                <ul>
-                    <li><strong>Précision & Stratégie :</strong> Comme un golfeur qui choisit le bon club pour le bon coup, nous définissons avec précision la meilleure stratégie pour atteindre vos objectifs.</li>
-                    <li><strong>Patience & Persévérance :</strong> La réussite ne se construit pas en un seul coup. Nous vous accompagnons à chaque étape, avec constance et engagement, jusqu'au succès.</li>
-                    <li><strong>Intégrité & Respect :</strong> Nous jouons toujours selon les règles, avec transparence et honnêteté, pour bâtir une relation de confiance durable.</li>
-                </ul>
-            </div>
-            <div className="values-image-container">
-                <TiltedCard
-                    imageSrc="/golf.jpg"
-                    
-                    captionText="La rigueur du golf, notre inspiration"
-                    containerHeight="300px"
-                    containerWidth="300px"
-                    imageHeight="300px"
-                    imageWidth="300px"
-                    rotateAmplitude={12}
-                    scaleOnHover={1.2}
-                    showMobileWarning={false}
-                    showTooltip={true}
-                    displayOverlayContent={true}
-                    overlayContent={
-                        <p className="tilted-card-demo-text">
-                            Précision & Stratégie
-                        </p>
-                    }
-                />
-            </div>
-        </div>
+  <div className="container">
+    <div className="values-content">
+      <div className="values-text">
+        <h2 className="section-title">Nos valeurs</h2>
+        <p>Chez TS-LOMA, notre philosophie s'inspire de la rigueur et de la vision du golf. Chaque projet est un nouveau parcours où nous appliquons nos principes fondamentaux :</p>
+        <ul>
+          <li><strong>Précision & Stratégie :</strong> Comme un golfeur qui choisit le bon club pour le bon coup, nous définissons avec précision la meilleure stratégie pour atteindre vos objectifs.</li>
+          <li><strong>Patience & Persévérance :</strong> La réussite ne se construit pas en un seul coup. Nous vous accompagnons à chaque étape, avec constance et engagement, jusqu'au succès.</li>
+          <li><strong>Intégrité & Respect :</strong> Nous jouons toujours selon les règles, avec transparence et honnêteté, pour bâtir une relation de confiance durable.</li>
+        </ul>
+      </div>
+      <div className="values-image-container" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', minHeight: '420px' }}>
+        <TiltedCard
+          imageSrc="/golf.jpg"
+          altText="Golf - Précision et stratégie"
+          captionText="La rigueur du golf, notre inspiration"
+          containerHeight="400px"
+          containerWidth="400px"
+          imageHeight="400px"
+          imageWidth="400px"
+          rotateAmplitude={14}
+          scaleOnHover={1.2}
+          showMobileWarning={false}
+          showTooltip={true}
+          displayOverlayContent={true}
+        />
+      </div>
     </div>
+  </div>
 </section>
 
             <section id="references" className="references-section">

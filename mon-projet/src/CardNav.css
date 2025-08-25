@@ -82,21 +82,7 @@
     margin: 0;
 }
 
-.card-nav-cta-button {
-  background-color: #111;
-  color: white;
-  border: none;
-  border-radius: calc(0.75rem - 0.35rem);
-  padding: 0.6rem 1.2rem;
-  height: auto;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
-.card-nav-cta-button:hover {
-  background-color: #333;
-}
 
 .card-nav-content {
   position: absolute;
@@ -176,9 +162,7 @@
     transform: none;
     order: 1;
   }
-  .card-nav-cta-button {
-    display: none;
-  }
+
   .card-nav-content {
     flex-direction: column;
     align-items: stretch;
