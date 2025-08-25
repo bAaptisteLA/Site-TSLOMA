@@ -153,7 +153,7 @@ function TSLomaSections() {
 
             <section className="hero-section">
                 <div className="hero-content">
-                    <h2 className="slogan">Accompagner les entreprises et les particuliers vers la réussite grâce à un conseil stratégique et une formation adaptée.</h2>
+                    <h2 className="slogan">TS-LOMA vous accompagne pour atteindre vos objectifs et viser votre cible précisément. </h2>
                     <a href="#contact" className="cta-button">Contactez-nous</a>
                 </div>
             </section>
@@ -163,8 +163,8 @@ function TSLomaSections() {
                     <div className="about-content">
                         <div className="portrait-container"></div>
                         <div className="bio-text">
-                            <h3>Vincent Amara, Dirigeant</h3>
-                            <p>Fondateur de TS-LOMA, Vincent Amara est un expert reconnu dans le conseil aux entreprises et la formation professionnelle. Fort de son expérience, il met son expertise au service de ses clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. Sa philosophie est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.</p>
+                            <h3>TS-LOMA</h3>
+                            <p>L'équipe TS-LOMA est un ensemble d'experts reconnu dans le conseil aux entreprises informatiques. Fort de leurs expériences, ils mettent leur expertise au service de leurs clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. La philosophie de l'équipe est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.</p>
                         </div>
                     </div>
                 </div>
@@ -174,19 +174,19 @@ function TSLomaSections() {
                 <h2 className="section-title" style={{ paddingBottom: '2rem', textAlign: 'center' }}>Nos services</h2>
                 <ScrollStack>
                     <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Conseil en stratégie</h2>
+                        <h2>Conseil en architecture MainFrame Z/OS</h2>
                         <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
                     </ScrollStackItem>
                     <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Formation en management</h2>
+                        <h2>Formation en MainFrame et Z/OS</h2>
                         <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
                     </ScrollStackItem>
                     <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Accompagnement des particuliers</h2>
-                        <p>Bénéficiez d'un coaching personnalisé pour vos projets de carrière ou de reconversion.</p>
+                        <h2>Accompagnement des indépendants</h2>
+                        <p>Portage salarial.</p>
                     </ScrollStackItem>
                     <ScrollStackItem itemClassName="service-card-custom">
-                        <h2>Support PME</h2>
+                        <h2>Support aux grandes entreprises</h2>
                         <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
                     </ScrollStackItem>
                 </ScrollStack>

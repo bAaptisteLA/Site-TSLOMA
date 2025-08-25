@@ -49,7 +49,7 @@ p {
 
 /* Hero Section */
 .hero-section {
-    position: relative; /* On retire le positionnement absolu */
+    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -59,6 +59,17 @@ p {
     text-align: center;
     color: #fff;
     overflow: hidden;
+    background-image: url('/golf_fond.jpg'); /* <-- Ajout du fond */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    inset: 0; /* assombrit pour lisibilité du texte */
+    z-index: 1;
 }
 
 .slogan {
@@ -72,7 +83,7 @@ p {
 
 .hero-content {
     position: relative;
-    z-index: 1; 
+    z-index: 2; 
     max-width: 700px;
     width: 100%;
     margin: 0 auto;
