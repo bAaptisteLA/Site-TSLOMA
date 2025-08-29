@@ -11,7 +11,7 @@
 
 .card-nav {
   display: block;
-  height: 60px;
+  height: 80px; /* Augmenté de 60px à 80px */
   padding: 0;
   background-color: white;
   border: 0.5px solid rgba(255, 255, 255, 0.1);
@@ -27,11 +27,11 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 80px; /* Augmenté de 60px à 80px */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0.45rem 0.55rem 1.1rem;
+  padding: 0.5rem 1rem;
   z-index: 2;
 }
 
@@ -42,8 +42,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  gap: 10px;
-  z-index: 3;
+  gap: 6px;
 }
 
 .hamburger-menu:hover .hamburger-line {
@@ -75,20 +74,34 @@
   transform: translate(-50%, -50%);
 }
 
-.logo-text {
-    font-size: 2em;
-    font-weight: 700;
-    color: #000;
-    margin:0px;
+.logo {
+  height: 100px;
+  width: auto;
+  margin-bottom: 30px;/* Ajusté pour correspondre à la nouvelle hauteur */
 }
 
+.card-nav-cta-button {
+  background-color: #111;
+  color: white;
+  border: none;
+  border-radius: calc(0.75rem - 0.35rem);
+  padding: 0 1rem;
+  height: 40px;
+  margin-bottom: 43px; 
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.card-nav-cta-button:hover {
+  background-color: #333;
+}
 
 .card-nav-content {
   position: absolute;
   left: 0;
   right: 0;
-  top: 70px;
+  top: 80px; 
   bottom: 0;
   padding: 0.5rem;
   display: flex;
@@ -134,7 +147,7 @@
   font-size: 16px;
   cursor: pointer;
   text-decoration: none;
-  color: currentColor;
+  color: #fff; /* Liens en blanc */
   transition: opacity 0.3s ease;
   display: inline-flex;
   align-items: center;
@@ -143,6 +156,7 @@
 
 .nav-card-link:hover {
   opacity: 0.75;
+  color: #fff; /* Conserve la couleur blanche au survol */
 }
 
 @media (max-width: 768px) {
@@ -150,17 +164,24 @@
     width: 90%;
     top: 1.2em;
   }
+
   .card-nav-top {
     padding: 0.5rem 1rem;
     justify-content: space-between;
   }
+
   .hamburger-menu {
     order: 2;
   }
+
   .logo-container {
     position: static;
     transform: none;
     order: 1;
+  }
+
+  .card-nav-cta-button {
+    display: none;
   }
 
   .card-nav-content {
@@ -171,15 +192,18 @@
     bottom: 0;
     justify-content: flex-start;
   }
+
   .nav-card {
     height: auto;
     min-height: 60px;
     flex: 1 1 auto;
     max-height: none;
   }
+
   .nav-card-label {
     font-size: 18px;
   }
+
   .nav-card-link {
     font-size: 15px;
   }

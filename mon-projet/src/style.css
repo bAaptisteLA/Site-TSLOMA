@@ -342,3 +342,20 @@ h2 {
     margin: 0;
     background: transparent;
 }
+
+.legal-mentions {
+  padding-top: 80px; /* Ajustez cette valeur en fonction de la hauteur de la barre de navigation */
+}
+
+.legal-mentions .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .legal-mentions {
+    padding-top: 100px; /* Plus d'espace pour les écrans mobiles si nécessaire */
+  }
+}

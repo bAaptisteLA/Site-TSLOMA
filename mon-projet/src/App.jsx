@@ -3,7 +3,6 @@ import Lenis from "lenis";
 
 /*----------------------------------*/
 // IMPORTS DES COMPOSANTS EXTERNES
-import Home from './Home';
 import CardNav from './CardNav';
 import TiltedCard from './TiltedCard';
 import SpotlightCard from "./SpotlightCard";
@@ -11,6 +10,7 @@ import LogoLoop from './LogoLoop';
 import "./style.css";
 import './SpotlightCard.css';
 import './LogoLoop.css';
+import LegalMentions from './LegalMentions'; // Import de la page des mentions légales
 
 /*----------------------------------*/
 // SOUS-COMPOSANT POUR L'EFFET DE DÉFILEMENT (ScrollStack)
@@ -185,8 +185,6 @@ function TSLomaSections() {
 
     return (
         <main>
-            <CardNav logoAlt="Logo de l'entreprise" items={navItems} baseColor="#fff" menuColor="#000" buttonBgColor="#111" buttonTextColor="#fff" ease="power3.out" />
-
             <section className="hero-section">
                 <div className="hero-content">
                     <h2 className="slogan">TS-LOMA vous accompagne pour atteindre vos objectifs et viser votre cible précisément. </h2>
@@ -331,16 +329,6 @@ function TSLomaSections() {
                 </div>
             </section>
 
-            <footer className="footer">
-                <div className="container">
-                    <p>&copy; 2024 TS-LOMA. Tous droits réservés.</p>
-                    <div className="footer-links">
-                        <a href="#">Mentions légales</a>
-                        <a href="#">LinkedIn</a>
-                        <a href="#">Twitter</a>
-                    </div>
-                </div>
-            </footer>
         </main>
     );
 }
@@ -360,17 +348,55 @@ export default function App() {
   }, []);
 
   const navigate = (path) => {
+    console.log(`Navigating to: ${path}`); // Ajoutez ceci pour déboguer
     window.history.pushState(null, '', path);
     setCurrentPage(path);
   };
 
+  const navItems = [
+    { label: "À propos", bgColor: "#0D0716", textColor: "#fff", links: [{ label: "L'entreprise", href: "#about" }, { label: "Nos valeurs", href: "#values" }] },
+    { label: "Services", bgColor: "#170D27", textColor: "#fff", links: [{ label: "Conseil", href: "#services" }, { label: "Formation", href: "#services" }] },
+    { label: "Contact", bgColor: "#271E37", textColor: "#fff", links: [{ label: "Email", href: "#contact" }] }
+  ];
+
   return (
     <React.StrictMode>
-      {currentPage === '/site' ? (
-        <TSLomaSections />
+      {/* Barre de navigation */}
+      <CardNav
+        logoAlt="Logo de l'entreprise"
+        items={navItems}
+        navigate={navigate} // Passez la fonction navigate ici
+        baseColor="#fff"
+        menuColor="#000"
+        buttonBgColor="#111"
+        buttonTextColor="#fff"
+        ease="power3.out"
+      />
+
+      {/* Contenu des pages */}
+      {currentPage === '/mentions-legales' ? (
+        <LegalMentions />
       ) : (
-        <Home navigate={navigate} />
+        <TSLomaSections />
       )}
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <p>&copy; 2024 TS-LOMA. Tous droits réservés.</p>
+          <div className="footer-links">
+            <a
+              href="/mentions-legales"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/mentions-legales');
+              }}
+            >
+              Mentions légales
+            </a>
+          </div>
+        </div>
+      </footer>
     </React.StrictMode>
   );
 }
