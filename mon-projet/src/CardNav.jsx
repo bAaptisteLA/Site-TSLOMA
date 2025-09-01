@@ -209,3 +209,18 @@ const CardNav = ({
   );
 };
 export default CardNav;
+
+/* Utilisation du composant CardNav avec les nouvelles props
+<CardNav
+  logo={logo}
+  logoAlt="Logo de l'entreprise"
+  items={navItems}
+  navigate={(path) => {
+    window.history.pushState(null, '', path);
+    setCurrentPage(path); // Assurez-vous que `setCurrentPage` est défini
+  }}
+  baseColor="#fff"
+  menuColor="#000"
+  buttonBgColor="#007bff"
+  buttonTextColor="#fff"
+/> */
