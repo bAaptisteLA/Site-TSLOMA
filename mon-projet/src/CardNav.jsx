@@ -3,17 +3,15 @@ import { gsap } from "gsap";
 import { GoArrowUpRight } from "react-icons/go";
 import "./CardNav.css";
 
-
 const CardNav = ({
   logoAlt = "Logo",
-  items,
+  items = [],
   className = "",
   ease = "power3.out",
   baseColor = "#fff",
   menuColor,
-  buttonBgColor,
-  buttonTextColor,
-  navigate, // Ajout de navigate pour gérer la navigation
+  buttonBgColor = "#007bff",
+  buttonTextColor = "#fff",
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -24,7 +22,6 @@ const CardNav = ({
   const calculateHeight = () => {
     const navEl = navRef.current;
     if (!navEl) return 260;
-
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     if (isMobile) {
       const contentEl = navEl.querySelector(".card-nav-content");
@@ -64,13 +61,7 @@ const CardNav = ({
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
-
-    tl.to(navEl, {
-      height: calculateHeight,
-      duration: 0.4,
-      ease,
-    });
-
+    tl.to(navEl, { height: calculateHeight, duration: 0.4, ease });
     tl.to(
       cardsRef.current,
       { y: 0, opacity: 1, duration: 0.4, ease, stagger: 0.08 },
@@ -88,17 +79,14 @@ const CardNav = ({
       tl?.kill();
       tlRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ease, items]);
 
   useLayoutEffect(() => {
     const handleResize = () => {
       if (!tlRef.current) return;
-
       if (isExpanded) {
         const newHeight = calculateHeight();
         gsap.set(navRef.current, { height: newHeight });
-
         tlRef.current.kill();
         const newTl = createTimeline();
         if (newTl) {
@@ -108,20 +96,18 @@ const CardNav = ({
       } else {
         tlRef.current.kill();
         const newTl = createTimeline();
-        if (newTl) {
-          tlRef.current = newTl;
-        }
+        if (newTl) tlRef.current = newTl;
       }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isExpanded]);
 
   const toggleMenu = () => {
     const tl = tlRef.current;
     if (!tl) return;
+
     if (!isExpanded) {
       setIsHamburgerOpen(true);
       setIsExpanded(true);
@@ -135,6 +121,16 @@ const CardNav = ({
 
   const setCardRef = (i) => (el) => {
     if (el) cardsRef.current[i] = el;
+  };
+
+  // Scroll vers une section interne
+  const scrollToSection = (hash) => {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setIsHamburgerOpen(false);
+      setIsExpanded(false);
+    }
   };
 
   return (
@@ -158,22 +154,21 @@ const CardNav = ({
           </div>
 
           <div className="logo-container">
-            <span className="logo-text">TS-LOMA</span>
+            <span className="logo-text">{logoAlt}</span>
           </div>
 
-          {/* Bouton pour revenir à l'accueil */}
           <button
             type="button"
             className="card-nav-cta-button"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-            onClick={() => navigate('/')} // Redirection vers l'accueil
+            onClick={() => scrollToSection("#top")}
           >
             Revenir à l'accueil
           </button>
         </div>
 
         <div className="card-nav-content" aria-hidden={!isExpanded}>
-          {(items || []).slice(0, 3).map((item, idx) => (
+          {items.slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
               className="nav-card"
@@ -183,22 +178,17 @@ const CardNav = ({
               <div className="nav-card-label">{item.label}</div>
               <div className="nav-card-links">
                 {item.links?.map((lnk, i) => (
-                  <a
+                  <button
                     key={`${lnk.label}-${i}`}
                     className="nav-card-link"
-                    href={lnk.href}
-                    aria-label={lnk.ariaLabel}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigation(lnk.href);
-                    }}
+                    onClick={() => scrollToSection(lnk.href)}
                   >
                     <GoArrowUpRight
                       className="nav-card-link-icon"
                       aria-hidden="true"
                     />
                     {lnk.label}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -208,19 +198,5 @@ const CardNav = ({
     </div>
   );
 };
-export default CardNav;
 
-/* Utilisation du composant CardNav avec les nouvelles props
-<CardNav
-  logo={logo}
-  logoAlt="Logo de l'entreprise"
-  items={navItems}
-  navigate={(path) => {
-    window.history.pushState(null, '', path);
-    setCurrentPage(path); // Assurez-vous que `setCurrentPage` est défini
-  }}
-  baseColor="#fff"
-  menuColor="#000"
-  buttonBgColor="#007bff"
-  buttonTextColor="#fff"
-/> */
+export default CardNav;
