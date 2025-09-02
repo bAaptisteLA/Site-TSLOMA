@@ -40,9 +40,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   cursor: pointer;
   gap: 6px;
+  padding-top: 40px; /* Ajusté pour centrer verticalement */
 }
 
 .hamburger-menu:hover .hamburger-line {
@@ -163,6 +164,30 @@
 .nav-card-link:hover {
   opacity: 0.75;
   color: #fff; /* Conserve la couleur blanche au survol */
+}
+
+.nav-card-link {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff; /* Liens en blanc */
+  background: none;     /* Supprime le fond blanc */
+  border: none;         /* Supprime la bordure du bouton */
+  padding: 0;           /* Supprime le padding par défaut */
+  font: inherit;        /* Hérite de la police du parent */
+  display: inline-flex; /* Pour aligner texte et icône */
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.3s ease;
+}
+
+.nav-card-link:hover {
+  opacity: 0.75;
+  color: #fff;
+}
+
+.nav-card-link:focus {
+  outline: none;        /* Supprime le contour bleu au focus */
 }
 
 @media (max-width: 768px) {
