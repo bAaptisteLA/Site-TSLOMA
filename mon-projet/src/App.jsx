@@ -176,10 +176,10 @@ function TSLomaSections() {
 
         emailjs
           .send(
-            "service_hdjt8mu",     // ✅ ton Service ID
-            "template_d0mgtus",    // ✅ ton Template ID
+            "service_wdi4cqq",     // ✅ ton Service ID
+            "template_wek6g3e",    // ✅ ton Template ID
             formData,
-            "vOeeWp2LyfK9cinAH"    // ✅ ta Public Key
+            "t9S9HdnD8dx-9DuvB"    // ✅ ta Public Key
           )
           .then(
             (response) => {

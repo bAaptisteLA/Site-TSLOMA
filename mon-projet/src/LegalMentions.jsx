@@ -33,7 +33,7 @@ export default function LegalMentions({ navigate }) {
           <h2>Éditeur du site</h2>
           <p>
             Nom de l'entreprise : TS-LOMA<br />
-            Adresse : 123 Rue Exemple, 75000 Paris, France<br />
+            Adresse : <br />
             Téléphone : +33 6 12 34 56 78<br />
             Email : contact@ts-loma.fr<br />
             SIRET : 123 456 789 00012
