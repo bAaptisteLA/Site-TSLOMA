@@ -9,6 +9,14 @@ export default function LegalMentions({ navigate }) {
     { label: "Contact", bgColor: "#271E37", textColor: "#fff", links: [{ label: "Email", href: "#contact" }] }
   ];
 
+  const handleNavigateHome = () => {
+    if (navigate && typeof navigate === 'function') {
+      navigate('/');
+    } else {
+      window.location.href = '/';
+    }
+  };
+
   return (
     <>
       {/* Barre de navigation */}
@@ -27,30 +35,59 @@ export default function LegalMentions({ navigate }) {
       <main className="legal-mentions">
         <div className="container">
           <h1>Mentions Légales</h1>
-          <p>
-            Conformément aux dispositions des articles 6-III et 19 de la Loi pour la Confiance dans l'Économie Numérique (LCEN), nous vous informons des éléments suivants :
-          </p>
-          <h2>Éditeur du site</h2>
-          <p>
-            Nom de l'entreprise : TS-LOMA<br />
-            Adresse : <br />
-            Téléphone : +33 6 12 34 56 78<br />
-            Email : contact@ts-loma.fr<br />
-            SIRET : 123 456 789 00012
-          </p>
-          <h2>Hébergement</h2>
-          <p>
-            Hébergeur : OVH<br />
-            Adresse : 2 Rue Kellermann, 59100 Roubaix, France<br />
-            Téléphone : +33 9 72 10 10 07
-          </p>
-          <h2>Propriété intellectuelle</h2>
-          <p>
-            Tous les contenus présents sur ce site (textes, images, logos, etc.) sont protégés par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable.
-          </p>
+
+          <section>
+            <h2>🏢 Informations sur l’entreprise</h2>
+            <p>
+              Dénomination sociale : TS-LOMA<br />
+              Forme juridique : Société par actions simplifiée (SAS)<br />
+              Capital social : 1 000 €<br />
+              Numéro SIREN : 880 676 523<br />
+              Numéro SIRET : 880 676 523 00033<br />
+              Numéro de TVA intracommunautaire : FR35880676523<br />
+              Code APE/NAF : 7022Z – Conseil pour les affaires et autres conseils de gestion<br />
+              Date d’immatriculation : 14 janvier 2020<br />
+              Greffe d’immatriculation : RCS Paris<br />
+              Adresse : 59 rue de Ponthieu, Bureau 326, 75008 Paris<br />
+              Président : Isabelle Lory
+            </p>
+          </section>
+
+          <section>
+            <h2>📞 Coordonnées de contact</h2>
+            <p>Email : tsloma@tsloma.com</p>
+          </section>
+
+          <section>
+            <h2>🖥️ Hébergement du site</h2>
+            <p>
+              Le site est hébergé par :<br />
+              Nom : Squarespace, Inc.<br />
+              Adresse : 8 Clarkson Street, New York, NY 10014, États-Unis<br />
+              Site web : <a href="https://www.squarespace.com" target="_blank" rel="noopener noreferrer">https://www.squarespace.com</a><br /><br />
+              Squarespace est une plateforme américaine qui fournit des services d'hébergement et de création de sites web. 
+              Conformément aux lois américaines, les données des utilisateurs peuvent être stockées et traitées aux États-Unis. 
+              Il est recommandé aux utilisateurs européens de prendre connaissance de la politique de confidentialité de Squarespace pour comprendre comment leurs données sont collectées et utilisées.
+            </p>
+          </section>
+
+          <section>
+            <h2>📄 Mentions légales supplémentaires</h2>
+            <p>
+              Directeur de la publication : Isabelle Lory<br />
+              Conformité RGPD : Conformément au Règlement Général sur la Protection des Données (RGPD), les utilisateurs disposent d’un droit d’accès, de rectification, de suppression et d’opposition concernant leurs données personnelles.<br />
+              Cookies : Le site utilise des cookies pour améliorer l’expérience utilisateur. L’utilisateur peut gérer ses préférences en matière de cookies dans les paramètres de son navigateur.
+            </p>
+          </section>
 
           {/* Bouton pour revenir à l'accueil */}
-          
+          <button
+            className="card-nav-cta-button"
+            onClick={handleNavigateHome}
+            style={{ marginTop: '20px' }}
+          >
+            Revenir à l'accueil
+          </button>
         </div>
       </main>
     </>
