@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useCallback, useState, useEffect } from 'react';
 import Lenis from "lenis";
+import emailjs from "emailjs-com";
 
 /*----------------------------------*/
 // IMPORTS DES COMPOSANTS EXTERNES
@@ -157,18 +158,13 @@ const companyLogos = [
 // COMPOSANT DE LA PAGE PRINCIPALE (TSLomaSections)
 
 function TSLomaSections() {
-    const navItems = [
-        { label: "À propos", bgColor: "#0D0716", textColor: "#fff", links: [{ label: "L'entreprise", href: "#about" }, { label: "Nos valeurs", href: "#values" }] },
-        { label: "Services", bgColor: "#170D27", textColor: "#fff", links: [{ label: "Conseil", href: "#services" }, { label: "Formation", href: "#services" }] },
-        { label: "Contact", bgColor: "#271E37", textColor: "#fff", links: [{ label: "Email", href: "#contact" }, { label: "Réseaux sociaux", href: "#" }] }
-    ];
-
-    // État et logiques pour le formulaire de contact
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
     });
+
+    const [status, setStatus] = useState("");
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -177,10 +173,26 @@ function TSLomaSections() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Données à envoyer :", formData);
-        alert("Merci pour votre message ! Nous vous recontacterons bientôt.");
-        // Réinitialiser le formulaire
-        setFormData({ name: '', email: '', message: '' });
+
+        emailjs
+          .send(
+            "service_hdjt8mu",     // ✅ ton Service ID
+            "template_d0mgtus",    // ✅ ton Template ID
+            formData,
+            "vOeeWp2LyfK9cinAH"    // ✅ ta Public Key
+          )
+          .then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              setStatus("✅ Message envoyé avec succès !");
+            },
+            (error) => {
+              console.error("FAILED...", error);
+              setStatus("❌ Erreur lors de l’envoi. Merci de réessayer.");
+            }
+          );
+
+        setFormData({ name: "", email: "", message: "" });
     };
 
     return (
@@ -192,89 +204,93 @@ function TSLomaSections() {
                 </div>
             </section>
 
+            {/* About */}
             <section id="about" className="about-section">
                 <div className="container">
                     <div className="about-content" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                    <div className="about-image-container" style={{ flex: '0 0 auto' }}>
-                        <TiltedCard
-                        imageSrc="/golf2.jpg"
-                        altText="Golf - Inspiration"
-                        captionText="L'esprit du golf"
-                        containerHeight="400px"
-                        containerWidth="400px"
-                        imageHeight="400px"
-                        imageWidth="400px"
-                        rotateAmplitude={12}
-                        scaleOnHover={1.15}
-                        showMobileWarning={false}
-                        showTooltip={true}
-                        displayOverlayContent={true}
-                        />
-                    </div>
-                    <div className="bio-text" style={{ flex: '1 1 0' }}>
-                        <h3>TS-LOMA</h3>
-                        <p>
-                        L'équipe TS-LOMA est un ensemble d'experts reconnu dans le conseil aux entreprises informatiques. Fort de leurs expériences, ils mettent leur expertise au service de leurs clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. La philosophie de l'équipe est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.
-                        </p>
-                    </div>
+                        <div className="about-image-container" style={{ flex: '0 0 auto' }}>
+                            <TiltedCard
+                                imageSrc="/golf2.jpg"
+                                altText="Golf - Inspiration"
+                                captionText="L'esprit du golf"
+                                containerHeight="400px"
+                                containerWidth="400px"
+                                imageHeight="400px"
+                                imageWidth="400px"
+                                rotateAmplitude={12}
+                                scaleOnHover={1.15}
+                                showMobileWarning={false}
+                                showTooltip={true}
+                                displayOverlayContent={true}
+                            />
+                        </div>
+                        <div className="bio-text" style={{ flex: '1 1 0' }}>
+                            <h3>TS-LOMA</h3>
+                            <p>
+                                L'équipe TS-LOMA est un ensemble d'experts reconnu dans le conseil aux entreprises informatiques. Fort de leurs expériences, ils mettent leur expertise au service de leurs clients pour les aider à surmonter les défis et à atteindre leurs objectifs stratégiques. La philosophie de l'équipe est basée sur l'écoute, le sur-mesure et l'humain au cœur de chaque projet.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
+            {/* Services */}
             <section id="services" className="services-section">
                 <h2 className="section-title" style={{ paddingBottom: '2rem', textAlign: 'center' }}>Nos services</h2>
                 <div className="services-row">
                     <SpotlightCard className="card-spotlight">
-                    <h2>Conseil en architecture MainFrame Z/OS</h2>
-                    <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
+                        <h2>Conseil en architecture MainFrame Z/OS</h2>
+                        <p>Définissez votre vision et vos objectifs avec des stratégies claires et efficaces.</p>
                     </SpotlightCard>
                     <SpotlightCard className="card-spotlight">
-                    <h2>Formation en MainFrame et Z/OS</h2>
-                    <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
+                        <h2>Formation en MainFrame et Z/OS</h2>
+                        <p>Développez les compétences de vos équipes pour un leadership éclairé et performant.</p>
                     </SpotlightCard>
                     <SpotlightCard className="card-spotlight">
-                    <h2>Accompagnement des indépendants</h2>
-                    <p>Portage salarial.</p>
+                        <h2>Accompagnement des indépendants</h2>
+                        <p>Portage salarial.</p>
                     </SpotlightCard>
                     <SpotlightCard className="card-spotlight">
-                    <h2>Support aux grandes entreprises</h2>
-                    <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
+                        <h2>Support aux grandes entreprises</h2>
+                        <p>Optimisez vos processus et gagnez en efficacité opérationnelle.</p>
                     </SpotlightCard>
                 </div>
             </section>
 
+            {/* Values */}
             <section id="values" className="values-section">
                 <div className="container">
                     <div className="values-content">
-                    <div className="values-text">
-                        <h2 className="section-title">Nos valeurs</h2>
-                        <p>Chez TS-LOMA, notre philosophie s'inspire de la rigueur et de la vision du golf. Chaque projet est un nouveau parcours où nous appliquons nos principes fondamentaux :</p>
-                        <ul>
-                        <li><strong>Précision & Stratégie :</strong> Comme un golfeur qui choisit le bon club pour le bon coup, nous définissons avec précision la meilleure stratégie pour atteindre vos objectifs.</li>
-                        <li><strong>Patience & Persévérance :</strong> La réussite ne se construit pas en un seul coup. Nous vous accompagnons à chaque étape, avec constance et engagement, jusqu'au succès.</li>
-                        <li><strong>Intégrité & Respect :</strong> Nous jouons toujours selon les règles, avec transparence et honnêteté, pour bâtir une relation de confiance durable.</li>
-                        </ul>
-                    </div>
-                    <div className="values-image-container" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', minHeight: '420px' }}>
-                        <TiltedCard
-                        imageSrc="/golf.jpg"
-                        altText="Golf - Précision et stratégie"
-                        captionText="La rigueur du golf, notre inspiration"
-                        containerHeight="400px"
-                        containerWidth="400px"
-                        imageHeight="400px"
-                        imageWidth="400px"
-                        rotateAmplitude={14}
-                        scaleOnHover={1.2}
-                        showMobileWarning={false}
-                        showTooltip={true}
-                        displayOverlayContent={true}
-                        />
-                    </div>
+                        <div className="values-text">
+                            <h2 className="section-title">Nos valeurs</h2>
+                            <p>Chez TS-LOMA, notre philosophie s'inspire de la rigueur et de la vision du golf. Chaque projet est un nouveau parcours où nous appliquons nos principes fondamentaux :</p>
+                            <ul>
+                                <li><strong>Précision & Stratégie :</strong> Comme un golfeur qui choisit le bon club pour le bon coup, nous définissons avec précision la meilleure stratégie pour atteindre vos objectifs.</li>
+                                <li><strong>Patience & Persévérance :</strong> La réussite ne se construit pas en un seul coup. Nous vous accompagnons à chaque étape, avec constance et engagement, jusqu'au succès.</li>
+                                <li><strong>Intégrité & Respect :</strong> Nous jouons toujours selon les règles, avec transparence et honnêteté, pour bâtir une relation de confiance durable.</li>
+                            </ul>
+                        </div>
+                        <div className="values-image-container" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', minHeight: '420px' }}>
+                            <TiltedCard
+                                imageSrc="/golf.jpg"
+                                altText="Golf - Précision et stratégie"
+                                captionText="La rigueur du golf, notre inspiration"
+                                containerHeight="400px"
+                                containerWidth="400px"
+                                imageHeight="400px"
+                                imageWidth="400px"
+                                rotateAmplitude={14}
+                                scaleOnHover={1.2}
+                                showMobileWarning={false}
+                                showTooltip={true}
+                                displayOverlayContent={true}
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
 
+            {/* References */}
             <section id="references" className="references-section">
                 <div className="container">
                     <h2 className="section-title">Références et collaborations</h2>
@@ -292,29 +308,30 @@ function TSLomaSections() {
                 </div>
             </section>
 
+            {/* Contact */}
             <section id="contact" className="contact-section">
                 <div className="container">
                     <h2 className="section-title">Contactez-nous</h2>
                     <form className="contact-form" onSubmit={handleSubmit}>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            placeholder="Votre nom" 
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Votre nom"
                             value={formData.name}
                             onChange={handleInputChange}
-                            required 
+                            required
                         />
-                        <input 
-                            type="email" 
-                            name="email" 
-                            placeholder="Votre email" 
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Votre email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            required 
+                            required
                         />
-                        <textarea 
-                            name="message" 
-                            placeholder="Votre message" 
+                        <textarea
+                            name="message"
+                            placeholder="Votre message"
                             rows="5"
                             value={formData.message}
                             onChange={handleInputChange}
@@ -322,13 +339,12 @@ function TSLomaSections() {
                         ></textarea>
                         <button type="submit" className="cta-button submit-button">Envoyer le message</button>
                     </form>
+                    {status && <p className="status-message">{status}</p>}
                     <div className="contact-info">
-                        <p>Email: contact@ts-loma.fr</p>
-                        <p>Téléphone: +33 6 12 34 56 78</p>
+                        <p>Email: tsloma@tsloma.com</p>
                     </div>
                 </div>
             </section>
-
         </main>
     );
 }
@@ -348,7 +364,7 @@ export default function App() {
   }, []);
 
   const navigate = (path) => {
-    console.log(`Navigating to: ${path}`); // Ajoutez ceci pour déboguer
+    console.log(`Navigating to: ${path}`);
     window.history.pushState(null, '', path);
     setCurrentPage(path);
   };
@@ -365,7 +381,7 @@ export default function App() {
       <CardNav
         logoAlt="Logo de l'entreprise"
         items={navItems}
-        navigate={navigate} // Passez la fonction navigate ici
+        navigate={navigate}
         baseColor="#fff"
         menuColor="#000"
         buttonBgColor="#111"

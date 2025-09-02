@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { GoArrowUpRight } from "react-icons/go";
 import "./CardNav.css";
-import logo from '/logos/logo-TS.png';
+
 
 const CardNav = ({
   logoAlt = "Logo",
@@ -158,7 +158,7 @@ const CardNav = ({
           </div>
 
           <div className="logo-container">
-            <img src={logo} alt={logoAlt} className="logo" />
+            <span className="logo-text">TS-LOMA</span>
           </div>
 
           {/* Bouton pour revenir à l'accueil */}

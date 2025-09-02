@@ -67,17 +67,23 @@
 
 .logo-container {
   display: flex;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  align-items: flex-start; /* Place le texte en haut */
+  justify-content: center; /* Centre horizontalement */
+  margin-top: -5%; /* Ajustez la marge supérieure si nécessaire */
 }
 
 .logo {
   height: 100px;
   width: auto;
-  margin-bottom: 30px;/* Ajusté pour correspondre à la nouvelle hauteur */
+  margin-bottom: 30px;/* Ajusté pour correspondre à la nouvelle hauteur */ 
+}
+
+.logo-text {
+  font-size: 32px; /* Augmente la taille du texte */
+  font-weight: bold; /* Texte en gras */
+  color: #ff5722; /* Couleur du texte (orange) */
+  text-transform: uppercase; /* Texte en majuscules */
+  line-height: 1; /* Réduit l'espacement vertical */
 }
 
 .card-nav-cta-button {
