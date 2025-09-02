@@ -35,7 +35,6 @@ const CardNav = ({
         contentEl.style.pointerEvents = "auto";
         contentEl.style.position = "static";
         contentEl.style.height = "auto";
-
         contentEl.offsetHeight;
 
         const topBar = 60;
@@ -123,14 +122,21 @@ const CardNav = ({
     if (el) cardsRef.current[i] = el;
   };
 
-  // Scroll vers une section interne
-  const scrollToSection = (hash) => {
-    const target = document.querySelector(hash);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsHamburgerOpen(false);
-      setIsExpanded(false);
+  // Navigation vers section interne (#id) ou page (/url)
+  const handleNavigation = (href) => {
+    if (!href) return;
+
+    if (href.startsWith("#")) {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.location.href = href;
     }
+
+    setIsHamburgerOpen(false);
+    setIsExpanded(false);
   };
 
   return (
@@ -161,7 +167,7 @@ const CardNav = ({
             type="button"
             className="card-nav-cta-button"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-            onClick={() => scrollToSection("#top")}
+            onClick={() => handleNavigation("/")}
           >
             Revenir à l'accueil
           </button>
@@ -181,7 +187,7 @@ const CardNav = ({
                   <button
                     key={`${lnk.label}-${i}`}
                     className="nav-card-link"
-                    onClick={() => scrollToSection(lnk.href)}
+                    onClick={() => handleNavigation(lnk.href)}
                   >
                     <GoArrowUpRight
                       className="nav-card-link-icon"
