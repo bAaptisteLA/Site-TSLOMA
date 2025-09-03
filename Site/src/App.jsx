@@ -379,7 +379,7 @@ export default function App() {
     <React.StrictMode>
       {/* Barre de navigation */}
       <CardNav
-        logoAlt="Logo de l'entreprise"
+        logoAlt="TSLOMA"
         items={navItems}
         navigate={navigate}
         baseColor="#fff"
