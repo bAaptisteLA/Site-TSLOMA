@@ -1,6 +1,6 @@
-# My React Project 🚀
+# TSLOMA Site
 
-Welcome to the official repository for my React project! This application is built using a modern stack focused on speed and efficiency. The core of the frontend is powered by **React**, with styling and components that are inspired by or sourced from **ReactBits** (https://reactbits.dev/).
+Welcome to the official repository for the TSLOMA website! The core of the frontend is powered by **React**, with styling and components that are inspired by or sourced from **ReactBits** (https://reactbits.dev/).
 
 ---
 
