@@ -31,9 +31,14 @@
   .hero-section {
         background-image: url('/golf_fond_tel.jpg');
     }
-    .hero-section::after {
-        background-color: rgba(85, 85, 85, 0.3); /* Ombre grise plus claire */
-    }
+   .hero-section h2 {
+    /* New styles for the H2 title background */
+    background-color: rgba(255, 255, 255, 0.4); /* White with 40% opacity */
+    padding: 1rem 2rem; /* Adds some space around the title */
+    border-radius: 10px; /* Rounds the corners */
+    backdrop-filter: blur(5px); /* Adds a cool blur effect behind the title */
+    color: #170D27; /* Sets the text color to dark */
+   } 
 }
 
 
