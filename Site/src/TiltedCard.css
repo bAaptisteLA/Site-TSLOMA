@@ -33,11 +33,7 @@
     }
    .hero-section h2 {
     /* New styles for the H2 title background */
-    background-color: rgba(255, 255, 255, 0.4); /* White with 40% opacity */
-    padding: 1rem 2rem; /* Adds some space around the title */
-    border-radius: 10px; /* Rounds the corners */
-    backdrop-filter: blur(5px); /* Adds a cool blur effect behind the title */
-    color: #170D27; /* Sets the text color to dark */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
    } 
 }
 
