@@ -24,7 +24,12 @@
   .tilted-card-caption {
     display: none;
   }
+   .tilted-card-figure, .tilted-card-inner, .tilted-card-img, .tilted-card-overlay {
+    max-width: 90vw;
+    height: auto;
+  }
 }
+
 
 .tilted-card-inner {
   position: relative;
