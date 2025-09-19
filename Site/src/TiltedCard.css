@@ -31,6 +31,9 @@
   .hero-section {
         background-image: url('/golf_fond_tel.jpg');
     }
+    .hero-section::after {
+        background-color: rgba(85, 85, 85, 0.3); /* Ombre grise plus claire */
+    }
 }
 
 
