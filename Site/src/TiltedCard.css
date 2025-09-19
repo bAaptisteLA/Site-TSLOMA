@@ -28,6 +28,9 @@
     max-width: 90vw;
     height: auto;
   }
+  .hero-section {
+        background-image: url('/golf_fond_tel.jpg');
+    }
 }
 
 
