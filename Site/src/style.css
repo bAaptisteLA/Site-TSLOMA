@@ -72,21 +72,24 @@ p {
     z-index: 1;
 }
 
-.slogan {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-
 .hero-content {
     position: relative;
     z-index: 2; 
     max-width: 700px;
     width: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Ajoute un espacement entre le slogan et le bouton */
+    transform: translateY(-100px); /* Remonte encore plus le contenu */
+}
+
+/* Pour les écrans de téléphone */
+@media (max-width: 768px) {
+    .hero-content {
+        transform: translateY(-130px); /* Ajuste le décalage pour mobile */
+    }
 }
 
 /* About Section */
@@ -358,4 +361,20 @@ h2 {
   .legal-mentions {
     padding-top: 100px; /* Plus d'espace pour les écrans mobiles si nécessaire */
   }
+}
+
+.slogan {
+    font-size: 2rem; /* Réduit la taille du texte */
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Pour les écrans de téléphone */
+@media (max-width: 768px) {
+    .slogan {
+        font-size: 2rem; /* Réduit encore plus la taille pour les petits écrans */
+        margin-top: 1rem;
+    }
 }
